@@ -222,8 +222,9 @@ void mouse_simulation(int maze[][COL], POS* start, POS* end)
             else
             {
                 currentSpot = pop(visitStack);
-                printf("\nBacktracking: *(%d, %d) ", currentSpot->row, currentSpot->col);
+                printf("\nBacktracking: *(%d, %d)", currentSpot->row, currentSpot->col);
                 maze[currentSpot->row][currentSpot->col] = 0;
+                currentSpot = pop(visitStack);
                 while (!emptyStack(altStack) && currentSpot->row != -1 && currentSpot->col != -1)
                 {
                     currentSpot = pop(visitStack);
@@ -276,39 +277,3 @@ int main()
 
     return 0;
 }
-
-// Output:
-
-// Original maze:
-// 0 1 1 0 1 0 0 1 
-// 0 0 0 0 0 1 1 0 
-// 1 1 1 0 0 1 1 1 
-// 0 0 0 1 0 0 0 1 
-// 0 1 0 0 1 1 0 0 
-// Enter starting point: 0 0
-// (0, 0)
-// (1, 0)
-// (1, 1)
-// (1, 2)
-// (1, 3)
-// *(0, 3)
-
-// Backtracking: *(0, 3) (-1, -1) 
-// (1, 4)
-// (2, 4)
-
-// *(2, 3)
-
-// Backtracking: *(2, 3) (-1, -1) 
-// (3, 4)
-// (3, 5)
-// (3, 6)
-// (4, 6)
-// (4, 7)
-
-// Exit found! Mouse is free and receives a piece of cheese as a reward.
-// * 1 1 0 1 0 0 1 
-// * * * * * 1 1 0 
-// 1 1 1 0 * 1 1 1 
-// 0 0 0 1 * * * 1 
-// 0 1 0 0 1 1 * * 
